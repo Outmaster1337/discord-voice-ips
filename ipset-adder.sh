@@ -93,7 +93,7 @@ prepare_ipset_files() {
 ensure_ipset_exists() {
     local ipset_name="$1"
     if ! ipset list "$ipset_name" &>/dev/null; then
-        ipset create "$ipset_name" hash:ip
+        ipset create "$ipset_name" hash:net family inet timeout 86400 
         log_success "Создан IPset лист: ${YELLOW}$ipset_name${NC}"
     else
         log_info "Используем существующий IPset лист: ${YELLOW}$ipset_name${NC}"
